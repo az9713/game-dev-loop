@@ -1,0 +1,208 @@
+THE CHRONICLE OF LORHELM — beginning the reign of Corgar (Craven, Just)
+
+Y1023 Corgar    gold   251 stab  62 prosp  60 army  300 pop  4900
+Y1024 Corgar    gold   262 stab  61 prosp  62 army  380 pop  4998  | A child is born to the royal house: Draulf.
+Y1025 Corgar    gold   265 stab  64 prosp  63 army  380 pop  5097  | Peasants in Cordale riot over their burdens. > You ease their burdens. The riots fade. A child is born to the royal house: Rhoyra.
+Y1026 Corgar    gold   251 stab  71 prosp  63 army  380 pop  5198
+Y1027 Corgar    gold   229 stab  70 prosp  71 army  460 pop  5301
+Y1028 Corgar    gold   282 stab  74 prosp  73 army  460 pop  5407
+Y1029 Corgar    gold   309 stab  78 prosp  75 army  460 pop  5515  | Peasants in Norvale riot over their burdens. > You ease their burdens. The riots fade.
+Y1030 Corgar    gold   398 stab  78 prosp  80 army  460 pop  5625
+Y1031 Corgar    gold   422 stab  78 prosp  79 army  540 pop  5737
+Y1032 Corgar    gold   498 stab  78 prosp  81 army  540 pop  5851
+Y1033 Corgar    gold   518 stab  82 prosp  82 army  540 pop  5968  | Peasants in Lorcrag riot over their burdens. > You ease their burdens. The riots fade. A child is born to the royal house: Dunlan.
+Y1034 Corgar    gold   571 stab  85 prosp  89 army  540 pop  6087  | A child is born to the royal house: Istvar.
+Y1035 Corgar    gold   589 stab  85 prosp  88 army  620 pop  6208
+Y1036 Corgar    gold   630 stab  88 prosp  95 army  620 pop  6332  | A child is born to the royal house: Alwen.
+Y1037 Corgar    gold   705 stab  88 prosp  97 army  620 pop  6458
+Y1038 Corgar    gold   754 stab  91 prosp 100 army  620 pop  6587
+Y1039 Corgar    gold   837 stab  91 prosp 100 army  620 pop  6718
+Y1040 Corgar    gold   853 stab  91 prosp  99 army  700 pop  6852  | A child is born to the royal house: Lorana.
+Y1041 Corgar    gold   842 stab  94 prosp  98 army  700 pop  6989
+Y1042 Corgar    gold   824 stab  98 prosp  97 army  700 pop  6928  | Plague spreads through Dunfell. The dying cry for aid.
+Y1043 Corgar    gold   835 stab 100 prosp  99 army  700 pop  7066  | Peasants in Aenmoor riot over their burdens. > You ease their burdens. The riots fade.
+Y1044 Corgar    gold   909 stab 100 prosp 100 army  700 pop  7207
+Y1045 Corgar    gold   928 stab 100 prosp 100 army  700 pop  7351  | Peasants in Yrhelm riot over their burdens. > You ease their burdens. The riots fade.
+Y1046 Corgar    gold  1010 stab 100 prosp 100 army  700 pop  7498
+Y1047 Corgar    gold  1066 stab 100 prosp 100 army  700 pop  7647
+Y1048 Corgar    gold  1126 stab  99 prosp  99 army  700 pop  7799
+Y1049 Corgar    gold  1138 stab 100 prosp  98 army  700 pop  7954
+Y1050 Corgar    gold  1204 stab  99 prosp 100 army  700 pop  8113
+Y1051 Corgar    gold  1305 stab  99 prosp 100 army  700 pop  8275
+Y1052 Corgar    gold  1320 stab 100 prosp  99 army  700 pop  8240  | Plague spreads through Wilmark. The dying cry for aid.
+Y1053 Corgar    gold  1344 stab 100 prosp  99 army  700 pop  8404
+Y1054 Wildric   gold  1422 stab  90 prosp 100 army  700 pop  8572  | Corgar dies, aged 60. Wildric ascends the throne (succeeding Corgar). The transition shakes the realm.
+Y1055 Wildric   gold  1475 stab  94 prosp 100 army  700 pop  8743  | Peasants in Kaelmere riot over their burdens. > You ease their burdens. The riots fade.
+Y1056 Wildric   gold  1502 stab  98 prosp  99 army  700 pop  8717  | Plague spreads through Serreach. The dying cry for aid.
+Y1057 Wildric   gold  1617 stab  98 prosp 100 army  700 pop  8891
+Y1058 Wildric   gold  1708 stab  97 prosp  99 army  700 pop  9068
+Y1059 Wildric   gold  1742 stab 100 prosp  98 army  700 pop  9049  | Plague spreads through Branwood. The dying cry for aid.
+Y1060 Wildric   gold  1746 stab 100 prosp 100 army  700 pop  9229
+Y1061 Wildric   gold  1815 stab 100 prosp 100 army  700 pop  9413  | Peasants in Vorwick riot over their burdens. > You ease their burdens. The riots fade. A child is born to the royal house: Rhowyn.
+Y1062 Wildric   gold  1869 stab 100 prosp  99 army  700 pop  9601
+Y1063 Wildric   gold  1977 stab  99 prosp  99 army  700 pop  9793
+Y1064 Wildric   gold  2119 stab  99 prosp 100 army  700 pop  9988
+Y1065 Wildric   gold  2237 stab  98 prosp  99 army  700 pop 10187  | A child is born to the royal house: Serelle.
+Y1066 Wildric   gold  2299 stab 100 prosp  98 army  700 pop 10190  | Plague spreads through Wilmere. The dying cry for aid.
+Y1067 Wildric   gold  2371 stab 100 prosp 100 army  700 pop 10393
+Y1068 Wildric   gold  2469 stab 100 prosp 100 army  700 pop 10600  | Peasants in Corwood riot over their burdens. > You ease their burdens. The riots fade. A child is born to the royal house: Morira.
+Y1069 Wildric   gold  2543 stab 100 prosp  99 army  700 pop 10612  | Plague spreads through Vorreach. The dying cry for aid.
+Y1070 Wildric   gold  2676 stab 100 prosp 100 army  700 pop 10824
+Y1071 Wildric   gold  2785 stab 100 prosp 100 army  700 pop 11040  | Peasants in Mormoor riot over their burdens. > You ease their burdens. The riots fade.
+Y1072 Wildric   gold  2930 stab  99 prosp  99 army  700 pop 11260
+Y1073 Wildric   gold  3049 stab 100 prosp 100 army  700 pop 11485  | Peasants in Berreach riot over their burdens. > You ease their burdens. The riots fade.
+Y1074 Wildric   gold  3205 stab 100 prosp 100 army  700 pop 11714
+Y1075 Wildric   gold  3336 stab 100 prosp 100 army  700 pop 11948  | Peasants in Dunwood riot over their burdens. > You ease their burdens. The riots fade.
+Y1076 Wildric   gold  3463 stab  98 prosp  99 army  700 pop 12186
+Y1077 Wildric   gold  3585 stab 100 prosp  98 army  700 pop 12429
+Y1078 Wildric   gold  3763 stab  99 prosp 100 army  700 pop 12677
+Y1079 Wildric   gold  3888 stab 100 prosp  99 army  700 pop 12730  | Plague spreads through Wilreach. The dying cry for aid.
+Y1080 Wildric   gold  4074 stab 100 prosp 100 army  700 pop 12984
+Y1081 Istvar    gold  4267 stab  89 prosp  99 army  700 pop 13243  | Wildric dies, aged 59. Istvar ascends the throne (succeeding Wildric). The transition shakes the realm.
+Y1082 Istvar    gold  4428 stab  93 prosp 100 army  700 pop 13507  | Peasants in Torreach riot over their burdens. > You ease their burdens. The riots fade.
+Y1083 Istvar    gold  4626 stab  96 prosp 100 army  700 pop 13777
+Y1084 Istvar    gold  4801 stab 100 prosp 100 army  700 pop 14052  | Peasants in Halmark riot over their burdens. > You ease their burdens. The riots fade.
+Y1085 Istvar    gold  5013 stab  99 prosp  99 army  700 pop 14333
+Y1086 Istvar    gold  5231 stab 100 prosp 100 army  700 pop 14619
+Y1087 Istvar    gold  5407 stab 100 prosp  99 army  700 pop 14911
+Y1088 Alwen     gold  5639 stab  90 prosp 100 army  700 pop 15209  | Istvar dies, aged 54. Alwen ascends the throne (succeeding Istvar). The transition shakes the realm.
+Y1089 Alwen     gold  5856 stab  94 prosp 100 army  700 pop 15513  | Peasants in Kaelford riot over their burdens. > You ease their burdens. The riots fade.
+Y1090 Alwen     gold  6100 stab  93 prosp 100 army  700 pop 15823
+Y1091 Alwen     gold  6302 stab  97 prosp  99 army  700 pop 15939  | Plague spreads through Berwick. The dying cry for aid.
+Y1092 Alwen     gold  6536 stab 100 prosp 100 army  700 pop 16257  | Peasants in Kaelwick riot over their burdens. > You ease their burdens. The riots fade.
+Y1093 Alwen     gold  6809 stab 100 prosp 100 army  700 pop 16582
+Y1094 Alwen     gold  7040 stab 100 prosp  99 army  700 pop 16913
+Y1095 Alwen     gold  7328 stab  99 prosp  99 army  700 pop 17251
+Y1096 Alwen     gold  7595 stab 100 prosp 100 army  700 pop 17596  | Peasants in Isthelm riot over their burdens. > You ease their burdens. The riots fade.
+Y1097 Alwen     gold  7841 stab 100 prosp  99 army  700 pop 17747  | Plague spreads through Branmark. The dying cry for aid.
+Y1098 Alwen     gold  8060 stab 100 prosp  99 army  700 pop 18101
+Y1099 Alwen     gold  8378 stab  99 prosp  99 army  700 pop 18463
+Y1100 Rhowyn    gold  8655 stab  90 prosp  98 army  700 pop 18832  | Alwen dies, aged 64. Rhowyn ascends the throne (succeeding Alwen). The transition shakes the realm.
+Y1101 Rhowyn    gold  8939 stab  92 prosp 100 army  700 pop 19208
+Y1102 Rhowyn    gold  9244 stab  96 prosp 100 army  700 pop 19592  | Peasants in Branreach riot over their burdens. > You ease their burdens. The riots fade. A child is born to the royal house: Garira.
+Y1103 Rhowyn    gold  9618 stab  96 prosp 100 army  700 pop 19983  | A child is born to the royal house: Corwen.
+Y1104 Rhowyn    gold  9972 stab  95 prosp  99 army  700 pop 20382
+Y1105 Rhowyn    gold 10275 stab  99 prosp  98 army  700 pop 20589  | Plague spreads through Vorhelm. The dying cry for aid.
+Y1106 Rhowyn    gold 10643 stab 100 prosp 100 army  700 pop 21000
+Y1107 Rhowyn    gold 10963 stab 100 prosp  99 army  700 pop 21220  | Plague spreads through Caelcrag. The dying cry for aid.
+Y1108 Rhowyn    gold 11347 stab  99 prosp  99 army  700 pop 21644
+Y1109 Rhowyn    gold 11742 stab 100 prosp 100 army  700 pop 22076
+Y1110 Serelle   gold 12148 stab  89 prosp  99 army  700 pop 22517  | Rhowyn dies, aged 49. Serelle ascends the throne (succeeding Rhowyn). The transition shakes the realm.
+Y1111 Serelle   gold 12524 stab  92 prosp  98 army  700 pop 22967
+Y1112 Serelle   gold 12992 stab  92 prosp 100 army  700 pop 23426
+Y1113 Serelle   gold 13442 stab  95 prosp 100 army  700 pop 23894
+Y1114 Serelle   gold 13934 stab  95 prosp 100 army  700 pop 24371
+Y1115 Serelle   gold 14408 stab  98 prosp 100 army  700 pop 24858
+Y1116 Serelle   gold 14924 stab  98 prosp 100 army  700 pop 25355
+Y1117 Serelle   gold 15362 stab 100 prosp  99 army  700 pop 25662  | Plague spreads through Garcrag. The dying cry for aid.
+Y1118 Serelle   gold 15817 stab 100 prosp  99 army  700 pop 26175
+Y1119 Serelle   gold 16265 stab 100 prosp 100 army  700 pop 26698  | Peasants in Alhelm riot over their burdens. > You ease their burdens. The riots fade.
+Y1120 Serelle   gold 16737 stab 100 prosp  99 army  700 pop 27031  | Plague spreads through Pervale. The dying cry for aid.
+Y1121 Morira    gold 17246 stab  90 prosp 100 army  700 pop 27571  | Peasants in Rhoreach riot over their burdens. > You ease their burdens. The riots fade. Serelle dies, aged 56. Morira ascends the throne (succeeding Serelle). The transition shakes the realm.
+Y1122 Morira    gold 17787 stab  89 prosp  99 army  700 pop 28122
+Y1123 Morira    gold 18311 stab  93 prosp 100 army  700 pop 28684  | Peasants in Torfell riot over their burdens. > You ease their burdens. The riots fade.
+Y1124 Morira    gold 18830 stab  96 prosp  99 army  700 pop 29257
+Y1125 Morira    gold 19352 stab 100 prosp  98 army  700 pop 29642  | Plague spreads through Algard. The dying cry for aid.
+Y1126 Morira    gold 19974 stab 100 prosp 100 army  700 pop 30234
+Y1127 Morira    gold 20581 stab  99 prosp  99 army  700 pop 30838
+Y1128 Garira    gold 21232 stab  89 prosp 100 army  700 pop 31454  | Morira dies, aged 60. Garira ascends the throne (succeeding Morira). The transition shakes the realm.
+Y1129 Garira    gold 21877 stab  88 prosp  99 army  700 pop 32083
+Y1130 Garira    gold 22507 stab  92 prosp 100 army  700 pop 32724  | Peasants in Osford riot over their burdens. > You ease their burdens. The riots fade.
+Y1131 Garira    gold 23214 stab  92 prosp 100 army  700 pop 33378
+Y1132 Garira    gold 23847 stab  96 prosp  99 army  700 pop 33845  | Plague spreads through Wilwood. The dying cry for aid.
+Y1133 Garira    gold 24511 stab  98 prosp 100 army  700 pop 34521  | A child is born to the royal house: Sermund.
+Y1134 Garira    gold 25183 stab 100 prosp  99 army  700 pop 35211  | A child is born to the royal house: Peryra.
+Y1135 Garira    gold 25921 stab  99 prosp  99 army  700 pop 35915
+Y1136 Garira    gold 26646 stab 100 prosp 100 army  700 pop 36633  | Peasants in Caelhold riot over their burdens. > You ease their burdens. The riots fade.
+Y1137 Garira    gold 27420 stab 100 prosp 100 army  700 pop 37365
+Y1138 Corwen    gold 28243 stab  90 prosp 100 army  700 pop 38112  | A child is born to the royal house: Norstan. Garira dies, aged 36. Corwen ascends the throne (succeeding Garira). The transition shakes the realm.
+Y1139 Corwen    gold 29024 stab  94 prosp 100 army  700 pop 38874  | Peasants in Yrgard riot over their burdens. > You ease their burdens. The riots fade. A child is born to the royal house: Wilona.
+Y1140 Corwen    gold 29854 stab  97 prosp 100 army  700 pop 39651  | A child is born to the royal house: Rhodric.
+Y1141 Corwen    gold 30644 stab 100 prosp  99 army  700 pop 40244  | Plague spreads through Osmark. The dying cry for aid. A child is born to the royal house: Cormir.
+Y1142 Corwen    gold 31508 stab  99 prosp  99 army  700 pop 41048  | A child is born to the royal house: Wilmund.
+Y1143 Corwen    gold 32362 stab 100 prosp 100 army  700 pop 41868  | Peasants in Jorwick riot over their burdens. > You ease their burdens. The riots fade.
+Y1144 Corwen    gold 33217 stab 100 prosp  99 army  700 pop 42705
+Y1145 Corwen    gold 34142 stab 100 prosp 100 army  700 pop 43559
+Y1146 Corwen    gold 35039 stab 100 prosp  99 army  700 pop 44430
+Y1147 Corwen    gold 36007 stab  99 prosp  99 army  700 pop 45318
+Y1148 Corwen    gold 36937 stab 100 prosp  98 army  700 pop 46024  | Plague spreads through Morcrag. The dying cry for aid.
+Y1149 Corwen    gold 37945 stab  99 prosp 100 army  700 pop 46944
+Y1150 Corwen    gold 38947 stab 100 prosp 100 army  700 pop 47882  | Peasants in Cordale riot over their burdens. > You ease their burdens. The riots fade.
+Y1151 Corwen    gold 39953 stab 100 prosp  99 army  700 pop 48839
+Y1152 Corwen    gold 40971 stab 100 prosp  99 army  700 pop 49615  | Plague spreads through Drahelm. The dying cry for aid.
+Y1153 Corwen    gold 41999 stab 100 prosp 100 army  700 pop 50607  | Peasants in Istwick riot over their burdens. > You ease their burdens. The riots fade.
+Y1154 Corwen    gold 43123 stab  99 prosp  99 army  700 pop 51619
+Y1155 Corwen    gold 44271 stab 100 prosp 100 army  700 pop 52651
+Y1156 Corwen    gold 45386 stab 100 prosp  99 army  700 pop 53504  | Plague spreads through Jorwick. The dying cry for aid.
+Y1157 Corwen    gold 46531 stab 100 prosp  99 army  700 pop 54574
+Y1158 Corwen    gold 47783 stab 100 prosp 100 army  700 pop 55665
+Y1159 Sermund   gold 49003 stab  90 prosp 100 army  700 pop 56778  | Peasants in Kaelfell riot over their burdens. > You ease their burdens. The riots fade. Corwen dies, aged 56. Sermund ascends the throne (succeeding Corwen). The transition shakes the realm.
+Y1160 Sermund   gold 50276 stab  89 prosp  99 army  700 pop 57913
+Y1161 Sermund   gold 51516 stab  93 prosp  98 army  700 pop 58871  | Plague spreads through Dramoor. The dying cry for aid.
+Y1162 Sermund   gold 52870 stab  93 prosp 100 army  700 pop 60048
+Y1163 Sermund   gold 54135 stab  95 prosp  99 army  700 pop 61248  | A child is born to the royal house: Aenbert.
+Y1164 Sermund   gold 55459 stab  99 prosp  98 army  700 pop 62272  | Plague spreads through Wilvale. The dying cry for aid.
+Y1165 Sermund   gold 56868 stab  98 prosp  98 army  700 pop 63517
+Y1166 Sermund   gold 58258 stab 100 prosp  97 army  700 pop 64787
+Y1167 Sermund   gold 59760 stab 100 prosp 100 army  700 pop 66082
+Y1168 Sermund   gold 61266 stab 100 prosp 100 army  700 pop 67403  | A child is born to the royal house: Pergar.
+Y1169 Sermund   gold 62775 stab 100 prosp 100 army  700 pop 68751  | Peasants in Rhodale riot over their burdens. > You ease their burdens. The riots fade.
+Y1170 Sermund   gold 64297 stab 100 prosp  99 army  700 pop 70126  | A child is born to the royal house: Garmund.
+Y1171 Sermund   gold 65933 stab 100 prosp 100 army  700 pop 71528
+Y1172 Sermund   gold 67545 stab 100 prosp 100 army  700 pop 72958  | Peasants in Edvale riot over their burdens. > You ease their burdens. The riots fade.
+Y1173 Sermund   gold 69222 stab  99 prosp  99 army  700 pop 74417
+Y1174 Sermund   gold 70875 stab 100 prosp  98 army  700 pop 75705  | Plague spreads through Almark. The dying cry for aid. A child is born to the royal house: Kaelara.
+Y1175 Sermund   gold 72620 stab 100 prosp 100 army  700 pop 77219
+Y1176 Sermund   gold 74344 stab 100 prosp  99 army  700 pop 78563  | Plague spreads through Wilwood. The dying cry for aid.
+Y1177 Sermund   gold 76111 stab 100 prosp  99 army  700 pop 80134  | A child is born to the royal house: Kaelwen.
+Y1178 Sermund   gold 77967 stab 100 prosp 100 army  700 pop 81736
+Y1179 Sermund   gold 79804 stab 100 prosp  99 army  700 pop 83170  | Plague spreads through Morfell. The dying cry for aid.
+Y1180 Sermund   gold 81706 stab 100 prosp 100 army  700 pop 84833  | Peasants in Kaelvale riot over their burdens. > You ease their burdens. The riots fade.
+Y1181 Sermund   gold 83680 stab 100 prosp 100 army  700 pop 86529
+Y1182 Sermund   gold 85667 stab 100 prosp 100 army  700 pop 88259  | Peasants in Kaelmoor riot over their burdens. > You ease their burdens. The riots fade.
+Y1183 Sermund   gold 87677 stab 100 prosp  99 army  700 pop 90024
+Y1184 Sermund   gold 89810 stab 100 prosp 100 army  700 pop 91824
+Y1185 Sermund   gold 91959 stab  99 prosp  99 army  700 pop 93660
+Y1186 Sermund   gold 94123 stab 100 prosp 100 army  700 pop 95533  | Peasants in Kaelmoor riot over their burdens. > You ease their burdens. The riots fade.
+Y1187 Sermund   gold 96365 stab  99 prosp  99 army  700 pop 97443
+Y1188 Sermund   gold 98594 stab 100 prosp  98 army  700 pop 99191  | Plague spreads through Torwood. The dying cry for aid.
+Y1189 Sermund   gold100876 stab 100 prosp 100 army  700 pop101174
+Y1190 Sermund   gold103259 stab  99 prosp  99 army  700 pop103197
+Y1191 Sermund   gold105721 stab  99 prosp 100 army  700 pop105260
+Y1192 Wilona    gold108156 stab  90 prosp  99 army  700 pop107365  | Sermund dies, aged 59. Wilona ascends the throne (succeeding Sermund). The transition shakes the realm.
+Y1193 Wilona    gold110653 stab  92 prosp 100 army  700 pop109512
+Y1194 Rhodric   gold113214 stab  86 prosp 100 army  700 pop111702  | Peasants in Caelreach riot over their burdens. > You ease their burdens. The riots fade. Wilona dies, aged 55. Rhodric ascends the throne (succeeding Wilona). The transition shakes the realm.
+Y1195 Rhodric   gold115870 stab  89 prosp 100 army  700 pop113936
+Y1196 Rhodric   gold118522 stab  93 prosp  99 army  700 pop116014  | Plague spreads through Dunmere. The dying cry for aid.
+Y1197 Rhodric   gold121235 stab  96 prosp  98 army  700 pop118334
+Y1198 Rhodric   gold123996 stab 100 prosp  97 army  700 pop120500  | Plague spreads through Edmere. The dying cry for aid.
+Y1199 Aenbert   gold126901 stab  70 prosp 100 army  700 pop122910  | Rhodric dies, aged 59. Cormir ascends the throne (succeeding Rhodric). The transition shakes the realm. Cormir dies, aged 58. Wilmund ascends the throne (succeeding Cormir). The transition shakes the realm. Wilmund dies, aged 57. Aenbert ascends the throne (succeeding Wilmund). The transition shakes the realm.
+Y1200 Aenbert   gold129772 stab  74 prosp  99 army  700 pop125168  | Plague spreads through Perwick. The dying cry for aid.
+Y1201 Aenbert   gold132719 stab  76 prosp 100 army  700 pop127671
+Y1202 Aenbert   gold135719 stab  79 prosp  99 army  700 pop130224
+Y1203 Aenbert   gold138862 stab  79 prosp 100 army  700 pop132828
+Y1204 Aenbert   gold141991 stab  82 prosp  99 army  700 pop135484
+Y1205 Aenbert   gold145206 stab  86 prosp 100 army  700 pop138193  | Peasants in Yrgard riot over their burdens. > You ease their burdens. The riots fade.
+Y1206 Aenbert   gold148549 stab  86 prosp 100 army  700 pop140956
+Y1207 Aenbert   gold151871 stab  90 prosp  99 army  700 pop143575  | Plague spreads through Norfell. The dying cry for aid. A child is born to the royal house: Almir.
+Y1208 Aenbert   gold155268 stab  93 prosp  98 army  700 pop146446  | A child is born to the royal house: Seryra.
+Y1209 Aenbert   gold158817 stab  93 prosp 100 army  700 pop149374  | A child is born to the royal house: Rhogar.
+Y1210 Aenbert   gold162410 stab  92 prosp  99 army  700 pop152361
+Y1211 Aenbert   gold166107 stab  92 prosp 100 army  700 pop155408
+Y1212 Garmund   gold169851 stab  81 prosp  99 army  700 pop158516  | Aenbert dies, aged 49. Garmund ascends the throne (succeeding Aenbert). The transition shakes the realm.
+Y1213 Garmund   gold173704 stab  81 prosp 100 army  700 pop161686
+Y1214 Garmund   gold177578 stab  85 prosp 100 army  700 pop164919  | Peasants in Wilgard riot over their burdens. > You ease their burdens. The riots fade.
+Y1215 Garmund   gold181592 stab  85 prosp 100 army  700 pop168217
+Y1216 Garmund   gold185609 stab  88 prosp  99 army  700 pop171581
+Y1217 Garmund   gold189789 stab  88 prosp 100 army  700 pop175012
+Y1218 Garmund   gold194026 stab  91 prosp 100 army  700 pop178512
+Y1219 Garmund   gold198350 stab  90 prosp  99 army  700 pop182082
+Y1220 Garmund   gold202703 stab  94 prosp  98 army  700 pop185523  | Plague spreads through Halfell. The dying cry for aid.
+Y1221 Garmund   gold207152 stab  97 prosp  97 army  700 pop189233
+Y1222 Garmund   gold211683 stab 100 prosp  96 army  700 pop192817  | Plague spreads through Corcrag. The dying cry for aid.
+
+============================================================
+*** The chronicle reaches its 200-year horizon, dynasty enduring. ***
+Years reigned: 200  |  Monarchs: 14 (Corgar -> Wildric -> Istvar -> Alwen -> Rhowyn -> Serelle -> Morira -> Garira -> Corwen -> Sermund -> Wilona -> Rhodric -> Aenbert -> Garmund)
+Wars won: 0  |  wars lost: 0  |  royal births: 26
+Final prestige: 24352

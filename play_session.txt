@@ -1,0 +1,237 @@
+================================================================
+  REALM — you are Mormund, ruler of Corwick.
+  Keep your dynasty on the throne. (Ctrl+C to abdicate.)
+================================================================
+
+  Year 1085 | Corwick | Ruler: Mormund (26) [Shrewd, Patient]
+  Gold 200g | Tax 25% | Army 300 | Pop 5000
+  Prosperity 50 | Stability 60 | Legitimacy 60
+  Heirs: Dunwyn (4), Joryra (21)
+  Neighbours: Istmere(-19), Lormark(+14), Torhelm(+9)
+
+EVENT: An envoy from Lormark proposes a trade pact.
+   [1] Accept the pact
+   [2] Refuse
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Istmere (-30g)
+   [7] Declare war on Istmere
+   [8] Hold court (do nothing bold)
+   > Treasury: +151 income, -75 upkeep (now 276g).
+EVENT: An envoy from Lormark proposes a trade pact.
+  > Trade with Lormark flourishes.
+DECREE: Declare war on Istmere
+  > War! You march against Istmere.
+Victory over Istmere! Plunder: +111g, losses: 79 troops.
+A child is born to the royal house: Torwin.
+
+  Year 1086 | Corwick | Ruler: Mormund (27) [Shrewd, Patient]
+  Gold 417g | Tax 25% | Army 221 | Pop 4900
+  Prosperity 55 | Stability 57 | Legitimacy 65
+  Heirs: Dunwyn (5), Torwin (0), Joryra (22)
+  Neighbours: Istmere(-39), Lormark(+34), Torhelm(+9)
+
+EVENT: Stewards report an unusually fertile season.
+   [1] Tax the surplus (+50g)
+   [2] Let the people keep it
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Istmere (-30g)
+   [7] Hold court (do nothing bold)
+   > Treasury: +149 income, -55 upkeep (now 511g).
+EVENT: Stewards report an unusually fertile season.
+  > You let folk keep the bounty. Prosperity grows.
+DECREE: Send gifts to Istmere (-30g)
+  > Gifts and envoys warm relations with Istmere.
+
+  Year 1087 | Corwick | Ruler: Mormund (28) [Shrewd, Patient]
+  Gold 481g | Tax 25% | Army 221 | Pop 4998
+  Prosperity 65 | Stability 59 | Legitimacy 65
+  Heirs: Dunwyn (6), Torwin (1), Joryra (23)
+  Neighbours: Istmere(-14), Lormark(+34), Torhelm(+9)
+
+EVENT: Plague spreads through Wildale. The dying cry for aid.
+   [1] Fund physicians (-60g)
+   [2] Let it run its course
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Istmere (-30g)
+   [7] Declare war on Istmere
+   [8] Hold court (do nothing bold)
+   > Treasury: +154 income, -55 upkeep (now 580g).
+EVENT: Plague spreads through Wildale. The dying cry for aid.
+  > You fund physicians. Coffers lighter, the realm grateful.
+DECREE: Send gifts to Istmere (-30g)
+  > Gifts and envoys warm relations with Istmere.
+
+  Year 1088 | Corwick | Ruler: Mormund (29) [Shrewd, Patient]
+  Gold 490g | Tax 25% | Army 221 | Pop 4897
+  Prosperity 64 | Stability 62 | Legitimacy 65
+  Heirs: Dunwyn (7), Joryra (24)
+  Neighbours: Istmere(+11), Lormark(+34), Torhelm(+9)
+
+EVENT: Peasants in Wildale riot over their burdens.
+   [1] Crush the revolt
+   [2] Make concessions (-30g)
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Torhelm (-30g)
+   [7] Hold court (do nothing bold)
+   > Treasury: +152 income, -55 upkeep (now 587g).
+EVENT: Peasants in Wildale riot over their burdens.
+  > You ease their burdens. The riots fade.
+DECREE: Invest in the realm (-50g)
+  > You fund roads and markets. Prosperity rises.
+
+  Year 1089 | Corwick | Ruler: Mormund (30) [Shrewd, Patient]
+  Gold 507g | Tax 25% | Army 221 | Pop 4994
+  Prosperity 71 | Stability 65 | Legitimacy 65
+  Heirs: Dunwyn (8), Joryra (25)
+  Neighbours: Istmere(+11), Lormark(+34), Torhelm(+9)
+
+EVENT: An envoy from Lormark proposes a trade pact.
+   [1] Accept the pact
+   [2] Refuse
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Torhelm (-30g)
+   [7] Hold court (do nothing bold)
+   > Treasury: +155 income, -55 upkeep (now 607g).
+EVENT: An envoy from Lormark proposes a trade pact.
+  > Trade with Lormark flourishes.
+DECREE: Recruit soldiers (-40g)
+  > Fresh levies swell your army.
+A child is born to the royal house: Eddor.
+
+  Year 1090 | Corwick | Ruler: Mormund (31) [Shrewd, Patient]
+  Gold 597g | Tax 25% | Army 321 | Pop 5093
+  Prosperity 73 | Stability 64 | Legitimacy 65
+  Heirs: Dunwyn (9), Eddor (0), Joryra (26)
+  Neighbours: Istmere(+11), Lormark(+54), Torhelm(+9)
+
+EVENT: Stewards report an unusually fertile season.
+   [1] Tax the surplus (+50g)
+   [2] Let the people keep it
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Torhelm (-30g)
+   [7] Hold court (do nothing bold)
+   > Treasury: +159 income, -80 upkeep (now 676g).
+EVENT: Stewards report an unusually fertile season.
+  > You let folk keep the bounty. Prosperity grows.
+DECREE: Recruit soldiers (-40g)
+  > Fresh levies swell your army.
+
+  Year 1091 | Corwick | Ruler: Mormund (32) [Shrewd, Patient]
+  Gold 636g | Tax 25% | Army 421 | Pop 5194
+  Prosperity 80 | Stability 66 | Legitimacy 65
+  Heirs: Dunwyn (10), Eddor (1), Joryra (27)
+  Neighbours: Istmere(+11), Lormark(+54), Torhelm(+9)
+
+EVENT: Peasants in Perhold riot over their burdens.
+   [1] Crush the revolt
+   [2] Make concessions (-30g)
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Torhelm (-30g)
+   [7] Hold court (do nothing bold)
+   > Treasury: +163 income, -105 upkeep (now 694g).
+EVENT: Peasants in Perhold riot over their burdens.
+  > You ease their burdens. The riots fade.
+DECREE: Hold court (do nothing bold)
+  > You hold court and tend to petitions.
+A child is born to the royal house: Torbert.
+Mormund dies, aged 33.
+Dunwyn ascends the throne (succeeding Mormund). The transition shakes the realm.
+
+  Year 1092 | Corwick | Ruler: Dunwyn (11) [Pious, Greedy]
+  Gold 664g | Tax 25% | Army 421 | Pop 5297
+  Prosperity 81 | Stability 60 | Legitimacy 60
+  Heirs: Eddor (2), Torbert (0), Joryra (28)
+  Neighbours: Istmere(+11), Lormark(+54), Torhelm(+9)
+
+EVENT: A wandering sellsword, Berstan, offers their blade.
+   [1] Hire the company (-40g)
+   [2] Decline
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Torhelm (-30g)
+   [7] Hold court (do nothing bold)
+   > Treasury: +163 income, -105 upkeep (now 722g).
+EVENT: A wandering sellsword, Berstan, offers their blade.
+  > Berstan and their company join your host.
+DECREE: Hold court (do nothing bold)
+  > You hold court and tend to petitions.
+
+  Year 1093 | Corwick | Ruler: Dunwyn (12) [Pious, Greedy]
+  Gold 682g | Tax 25% | Army 501 | Pop 5402
+  Prosperity 80 | Stability 60 | Legitimacy 60
+  Heirs: Eddor (3), Torbert (1), Joryra (29)
+  Neighbours: Istmere(+11), Lormark(+54), Torhelm(+9)
+
+EVENT: Peasants in Wilreach riot over their burdens.
+   [1] Crush the revolt
+   [2] Make concessions (-30g)
+   > 
+DECREE: choose your action
+   [1] Raise taxes (+10%)
+   [2] Lower taxes (-10%)
+   [3] Invest in the realm (-50g)
+   [4] Recruit soldiers (-40g)
+   [5] Hold a feast (-30g)
+   [6] Send gifts to Torhelm (-30g)
+   [7] Hold court (do nothing bold)
+   > Treasury: +166 income, -125 upkeep (now 723g).
+EVENT: Peasants in Wilreach riot over their burdens.
+  > You ease their burdens. The riots fade.
+DECREE: Hold court (do nothing bold)
+  > You hold court and tend to petitions.
+
+  Year 1094 | Corwick | Ruler: Dunwyn (13) [Pious, Greedy]
+  Gold 693g | Tax 25% | Army 501 | Pop 5510
+  Prosperity 81 | Stability 64 | Legitimacy 60
+  Heirs: Eddor (4), Torbert (2), Joryra (30)
+  Neighbours: Istmere(+11), Lormark(+54), Torhelm(+9)
+
+  (Content with a stable, prosperous realm, the player lays down the crown.)
+You abdicate the throne after 10 years. Prestige: 404. Farewell.

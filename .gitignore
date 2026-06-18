@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Auto-generated mirror of CLAUDE.md (may carry machine-local paths)
+AGENTS.md
+
+# Unrelated / personal files that happen to live in this working dir — never publish
+.ignore/
+Loops for Non-coders.mhtml
+transcripit.txt
+cc1_loop.txt
+cc2_loop.txt
+cc3_loop.txt
+gpt5.5_summary.txt
+gpt5.5_summary (2).txt
