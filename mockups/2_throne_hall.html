@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Realm — Style 2: Throne Hall</title>
+<style>
+  /* ponytail: static mockup. Pure CSS/SVG, no external assets, no JS. */
+  :root{
+    --gold:#d4af37; --gold-dim:#9c802c; --stone:#2a2620; --stone-lo:#171410;
+    --text:#e8dcc0; --red:#8d211b;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; color:var(--text);
+    font-family:"Trajan Pro","Palatino Linotype",Palatino,Georgia,serif;
+    background:
+      radial-gradient(80% 60% at 50% 18%, rgba(255,196,90,.18), transparent 60%),
+      radial-gradient(120% 120% at 50% 120%, #211c15 0%, #0c0a07 70%),
+      #0c0a07;
+    display:flex; justify-content:center; padding:30px 16px 50px;
+  }
+  /* candle vignette + stone wall texture */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.10;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+  .hall{width:min(780px,100%); position:relative; z-index:1}
+
+  /* hanging banner with crest */
+  .banner-wrap{display:flex;justify-content:center;margin-bottom:8px}
+  .banner{width:120px;background:linear-gradient(#3a0d0a,#5e120d);position:relative;
+    padding:14px 10px 22px;border:1px solid var(--gold-dim);border-top:3px solid var(--gold);
+    box-shadow:0 10px 26px rgba(0,0,0,.6);}
+  .banner::after{content:"";position:absolute;left:0;right:0;bottom:-18px;height:18px;
+    background:linear-gradient(#5e120d,#3a0d0a);
+    clip-path:polygon(0 0,100% 0,100% 100%,75% 40%,50% 100%,25% 40%,0 100%);}
+  .crest{width:84px;height:88px;display:block;margin:0 auto;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+
+  h1{text-align:center;font-size:30px;letter-spacing:8px;margin:6px 0 0;color:var(--gold);
+     font-variant:small-caps;text-shadow:0 0 16px rgba(212,175,55,.35)}
+  .ruler{text-align:center;color:#cdbd95;font-size:16px;letter-spacing:2px;margin:2px 0 22px}
+  .ruler b{color:var(--text)} .ruler .traits{color:var(--gold-dim);font-style:italic;letter-spacing:1px}
+
+  /* carved stat panels */
+  .panels{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+  .panel{background:linear-gradient(#211d16,#15110c);border:1px solid #463c28;border-radius:4px;
+    padding:12px 14px;box-shadow:inset 0 2px 8px rgba(0,0,0,.7), 0 1px 0 rgba(255,220,140,.06);}
+  .panel .v{font-size:26px;color:var(--gold);text-shadow:0 0 10px rgba(212,175,55,.25)}
+  .panel .k{font-size:12px;letter-spacing:2px;color:#9c8c66;text-transform:uppercase}
+
+  .bars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+  .gauge .k{display:flex;justify-content:space-between;font-size:12px;letter-spacing:1px;color:#b9a877;text-transform:uppercase}
+  .bar{height:14px;margin-top:5px;background:#15110c;border:1px solid #463c28;border-radius:7px;overflow:hidden}
+  .bar>i{display:block;height:100%;border-radius:7px;
+    background:linear-gradient(90deg,#7a5c12,var(--gold));box-shadow:0 0 10px rgba(212,175,55,.5)}
+
+  .scene{border-top:1px solid #463c28;border-bottom:1px solid #463c28;padding:20px 4px;margin-bottom:22px;
+    text-align:center}
+  .scene .label{letter-spacing:5px;color:var(--red);font-size:13px;text-transform:uppercase}
+  .scene p{font-size:19px;margin:8px 0 0;color:#efe6cf}
+
+  .choices{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .choices button{font:inherit;font-size:16px;letter-spacing:1px;cursor:pointer;color:var(--text);
+    padding:13px 26px;border-radius:4px;border:1px solid var(--gold-dim);
+    background:linear-gradient(#2c2619,#191510);
+    box-shadow:0 2px 0 #000, inset 0 1px 0 rgba(255,220,140,.12);transition:.15s}
+  .choices button:hover{border-color:var(--gold);color:#fff;
+    box-shadow:0 0 18px rgba(212,175,55,.5), inset 0 1px 0 rgba(255,220,140,.2)}
+
+  .neigh{display:flex;justify-content:center;gap:22px;margin-top:24px;font-size:13px;letter-spacing:1px;color:#9c8c66}
+  .neigh b{color:#cdbd95}
+  .pos{color:#79b07a} .neg{color:#c8736b}
+  .tag{position:fixed;top:10px;left:12px;color:var(--gold-dim);font-family:system-ui;font-size:12px;opacity:.8;z-index:2}
+</style>
+</head>
+<body>
+<div class="tag">STYLE 2 — Throne Hall (mockup)</div>
+<div class="hall">
+  <div class="banner-wrap">
+    <div class="banner">
+      <svg class="crest" viewBox="0 0 100 105" aria-hidden="true">
+        <defs><clipPath id="sh"><path d="M6 6 H94 V46 Q94 88 50 100 Q6 88 6 46 Z"/></clipPath></defs>
+        <g clip-path="url(#sh)">
+          <rect x="0" y="0" width="100" height="105" fill="#1c3a5e"/>
+          <polygon points="50,8 96,100 4,100" fill="#7a1410"/>
+          <g fill="#d8b54a">
+            <rect x="38" y="44" width="24" height="34"/>
+            <rect x="36" y="38" width="6" height="8"/><rect x="47" y="38" width="6" height="8"/><rect x="58" y="38" width="6" height="8"/>
+            <rect x="46" y="56" width="8" height="14" fill="#3a230c"/>
+          </g>
+        </g>
+        <path d="M6 6 H94 V46 Q94 88 50 100 Q6 88 6 46 Z" fill="none" stroke="#d4af37" stroke-width="4"/>
+      </svg>
+    </div>
+  </div>
+
+  <h1>Corwick</h1>
+  <div class="ruler">King <b>Mormund</b>, age 26 &nbsp;&middot;&nbsp; <span class="traits">Shrewd &middot; Patient</span> &nbsp;&middot;&nbsp; Year 1085</div>
+
+  <div class="panels">
+    <div class="panel"><div class="v">200</div><div class="k">Treasury</div></div>
+    <div class="panel"><div class="v">300</div><div class="k">Army</div></div>
+    <div class="panel"><div class="v">5,000</div><div class="k">Population</div></div>
+  </div>
+
+  <div class="bars">
+    <div class="gauge"><div class="k"><span>Prosperity</span><span>50</span></div><div class="bar"><i style="width:50%"></i></div></div>
+    <div class="gauge"><div class="k"><span>Stability</span><span>60</span></div><div class="bar"><i style="width:60%"></i></div></div>
+    <div class="gauge"><div class="k"><span>Legitimacy</span><span>60</span></div><div class="bar"><i style="width:60%"></i></div></div>
+  </div>
+
+  <div class="scene">
+    <div class="label">A matter before the court</div>
+    <p>An envoy from <b>Lormark</b> proposes a pact of trade.</p>
+  </div>
+  <div class="choices">
+    <button>Accept the pact</button>
+    <button>Refuse</button>
+  </div>
+
+  <div class="neigh">
+    <span>Istmere <b class="neg">&minus;19</b></span>
+    <span>Lormark <b class="pos">+14</b></span>
+    <span>Torhelm <b class="pos">+9</b></span>
+  </div>
+</div>
+</body>
+</html>

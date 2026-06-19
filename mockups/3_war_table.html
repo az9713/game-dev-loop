@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Realm — Style 3: War Table / Map</title>
+<style>
+  /* ponytail: static mockup. Pure CSS/SVG, no external assets, no JS. */
+  :root{
+    --ink:#4a3318; --sepia:#caa46a; --gold:#9c7416; --red:#7a1410; --blue:#1c3a5e;
+    --panel:#241d12; --panel-text:#e8dcc0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;padding:26px 16px;background:#1a140c;
+    font-family:"Palatino Linotype",Palatino,Georgia,serif;color:var(--ink);
+    display:flex;justify-content:center;align-items:flex-start}
+  .wrap{width:min(940px,100%);display:grid;grid-template-columns:1.7fr 1fr;gap:18px}
+  @media(max-width:720px){.wrap{grid-template-columns:1fr}}
+
+  .map{position:relative;border-radius:4px;overflow:hidden;border:3px solid #3a2a16;
+    box-shadow:0 14px 40px rgba(0,0,0,.6);min-height:430px;
+    background:radial-gradient(120% 120% at 40% 20%,#f0dcad,#d8bd86 60%,#c2a266);}
+  .map::before{content:"";position:absolute;inset:0;opacity:.10;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+  .map h2{position:absolute;top:12px;left:0;right:0;text-align:center;margin:0;z-index:3;
+    font-variant:small-caps;letter-spacing:3px;color:var(--red);font-size:22px;text-shadow:0 1px 0 #f5e6c2}
+  .map .yr{position:absolute;top:42px;left:0;right:0;text-align:center;z-index:3;font-style:italic;color:#6a4d28;font-size:13px}
+  svg.terrain{position:absolute;inset:0;width:100%;height:100%}
+
+  /* realm markers */
+  .marker{position:absolute;transform:translate(-50%,-100%);text-align:center;z-index:4;width:96px}
+  .pin{width:26px;height:32px;margin:0 auto;display:block;filter:drop-shadow(1px 2px 2px rgba(0,0,0,.4))}
+  .marker .nm{font-variant:small-caps;font-size:14px;color:#3a2a16;text-shadow:0 1px 0 #f5e6c2}
+  .marker .rel{font-size:12px;font-weight:bold}
+  .pos{color:#2f6f30} .neg{color:#9a2b22}
+  .seat .nm{font-size:16px;color:var(--red)}
+
+  /* compass */
+  .compass{position:absolute;right:14px;bottom:12px;width:64px;height:64px;opacity:.85;z-index:3}
+
+  /* council panel */
+  .council{background:linear-gradient(#241d12,#15100a);border:1px solid #4a3c24;border-radius:4px;
+    color:var(--panel-text);padding:18px 18px 22px;box-shadow:0 14px 40px rgba(0,0,0,.6)}
+  .council h3{margin:0 0 2px;letter-spacing:3px;font-variant:small-caps;color:var(--sepia);font-size:20px}
+  .council .king{font-size:13px;color:#b9a877;margin-bottom:14px}
+  .council .king b{color:#fff}
+  .row{display:flex;justify-content:space-between;font-size:14px;padding:5px 0;border-bottom:1px dotted #4a3c24}
+  .row span:last-child{color:var(--sepia)}
+  .gauge{margin:10px 0 0}
+  .gauge .k{display:flex;justify-content:space-between;font-size:12px;color:#b9a877;letter-spacing:1px}
+  .bar{height:10px;margin-top:3px;background:#15100a;border:1px solid #4a3c24;border-radius:5px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:linear-gradient(90deg,#7a5c12,#d4af37)}
+
+  .event{margin:16px 0 12px;font-size:14px;font-style:italic;color:#efe6cf;
+    border-left:3px solid var(--red);padding-left:10px}
+  .decree-h{letter-spacing:2px;font-size:12px;color:#9c8c66;text-transform:uppercase;margin-bottom:8px}
+  .decrees{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .decrees button{font:inherit;font-size:13px;cursor:pointer;color:var(--panel-text);
+    background:linear-gradient(#2c2619,#191510);border:1px solid #6a5630;border-radius:3px;
+    padding:9px 8px;transition:.15s}
+  .decrees button:hover{border-color:var(--sepia);color:#fff;box-shadow:0 0 12px rgba(212,175,55,.4)}
+  .decrees button.war{color:#e7b0a8;border-color:#7a1410}
+  .decrees button.war:hover{box-shadow:0 0 12px rgba(160,40,30,.6);color:#ffd9d2}
+  .tag{position:fixed;top:10px;left:12px;color:#caa84d;font-family:system-ui;font-size:12px;opacity:.8;z-index:5}
+</style>
+</head>
+<body>
+<div class="tag">STYLE 3 — War Table / Map (mockup)</div>
+<div class="wrap">
+
+  <!-- MAP -->
+  <div class="map">
+    <h2>The Realm of Corwick</h2>
+    <div class="yr">&mdash; Year 1085 &mdash;</div>
+    <svg class="terrain" viewBox="0 0 600 430" preserveAspectRatio="none" aria-hidden="true">
+      <!-- sea already in bg; draw coastline + rivers -->
+      <path d="M-5 120 Q120 80 230 130 T470 110 T620 150 L620 -5 L-5 -5 Z" fill="#bcd0c4" opacity="0"/>
+      <!-- land blobs (regions) -->
+      <path d="M40 70 Q160 40 300 80 Q470 50 560 120 Q600 230 520 330 Q420 410 280 380 Q120 410 60 300 Q20 180 40 70 Z"
+            fill="#cdb079" stroke="#9c7416" stroke-width="2"/>
+      <!-- inner shading -->
+      <path d="M40 70 Q160 40 300 80 Q470 50 560 120 Q600 230 520 330 Q420 410 280 380 Q120 410 60 300 Q20 180 40 70 Z"
+            fill="none" stroke="#f0dcad" stroke-width="6" opacity=".5"/>
+      <!-- river -->
+      <path d="M300 90 Q280 180 330 240 Q360 300 300 360" fill="none" stroke="#5b86a6" stroke-width="3" opacity=".75"/>
+      <!-- region dividers (dashed borders) -->
+      <path d="M300 80 Q250 200 300 360" fill="none" stroke="#9c7416" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6"/>
+      <path d="M300 130 Q420 180 540 150" fill="none" stroke="#9c7416" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6"/>
+      <!-- little mountains + trees -->
+      <g fill="#8a6a38" stroke="#5a3f1c" stroke-width="1">
+        <path d="M120 250 l16 -26 l16 26 z"/><path d="M150 255 l14 -22 l14 22 z"/>
+        <path d="M470 250 l16 -26 l16 26 z"/>
+      </g>
+      <g fill="#5e7a4a"><circle cx="200" cy="320" r="6"/><circle cx="215" cy="325" r="5"/><circle cx="430" cy="320" r="6"/></g>
+    </svg>
+
+    <!-- markers -->
+    <div class="marker seat" style="left:50%;top:62%">
+      <svg class="pin" viewBox="0 0 26 32"><path d="M13 0 C5 0 0 6 0 13 C0 23 13 32 13 32 C13 32 26 23 26 13 C26 6 21 0 13 0Z" fill="#7a1410" stroke="#d4af37" stroke-width="2"/><rect x="9" y="9" width="8" height="8" fill="#d8b54a"/></svg>
+      <div class="nm">Corwick</div>
+    </div>
+    <div class="marker" style="left:24%;top:40%">
+      <svg class="pin" viewBox="0 0 26 32"><path d="M13 0 C5 0 0 6 0 13 C0 23 13 32 13 32 C13 32 26 23 26 13 C26 6 21 0 13 0Z" fill="#5a1512" stroke="#7a3b30" stroke-width="2"/></svg>
+      <div class="nm">Istmere</div><div class="rel neg">&minus;19 &#9876;</div>
+    </div>
+    <div class="marker" style="left:74%;top:32%">
+      <svg class="pin" viewBox="0 0 26 32"><path d="M13 0 C5 0 0 6 0 13 C0 23 13 32 13 32 C13 32 26 23 26 13 C26 6 21 0 13 0Z" fill="#1c3a5e" stroke="#5b86a6" stroke-width="2"/></svg>
+      <div class="nm">Lormark</div><div class="rel pos">+14</div>
+    </div>
+    <div class="marker" style="left:62%;top:78%">
+      <svg class="pin" viewBox="0 0 26 32"><path d="M13 0 C5 0 0 6 0 13 C0 23 13 32 13 32 C13 32 26 23 26 13 C26 6 21 0 13 0Z" fill="#2f5e3a" stroke="#6a9e5e" stroke-width="2"/></svg>
+      <div class="nm">Torhelm</div><div class="rel pos">+9</div>
+    </div>
+
+    <svg class="compass" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="28" fill="none" stroke="#9c7416" stroke-width="1.5"/>
+      <polygon points="32,6 37,32 32,30 27,32" fill="#7a1410"/>
+      <polygon points="32,58 37,32 32,34 27,32" fill="#4a3318"/>
+      <text x="32" y="20" text-anchor="middle" font-size="9" fill="#4a3318" font-family="serif">N</text>
+    </svg>
+  </div>
+
+  <!-- COUNCIL -->
+  <div class="council">
+    <h3>The King's Council</h3>
+    <div class="king">King <b>Mormund</b>, 26 &middot; Shrewd, Patient &middot; Heirs: Dunwyn (4), Joryra (21)</div>
+
+    <div class="row"><span>Treasury</span><span>200 gold</span></div>
+    <div class="row"><span>Army</span><span>300</span></div>
+    <div class="row"><span>Population</span><span>5,000</span></div>
+    <div class="row"><span>Tax rate</span><span>25%</span></div>
+
+    <div class="gauge"><div class="k"><span>Prosperity</span><span>50</span></div><div class="bar"><i style="width:50%"></i></div></div>
+    <div class="gauge"><div class="k"><span>Stability</span><span>60</span></div><div class="bar"><i style="width:60%"></i></div></div>
+    <div class="gauge"><div class="k"><span>Legitimacy</span><span>60</span></div><div class="bar"><i style="width:60%"></i></div></div>
+
+    <div class="event">An envoy from Lormark proposes a trade pact. &mdash; Accept, or refuse?</div>
+
+    <div class="decree-h">Issue a decree</div>
+    <div class="decrees">
+      <button>Invest in realm</button>
+      <button>Recruit soldiers</button>
+      <button>Hold a feast</button>
+      <button>Send gifts</button>
+      <button>Raise taxes</button>
+      <button class="war">Declare war &#9876;</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

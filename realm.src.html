@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Realm — a fantasy-kingdom chronicle</title>
+<style>
+  /* ponytail: one self-contained file. Engine + UI + embedded fonts, no network. */
+  @font-face{font-family:"Blackletter";font-weight:400;
+    src:url(data:font/woff2;base64,__BLACKLETTER_B64__) format("woff2");}
+  @font-face{font-family:"Grenze";font-weight:400;
+    src:url(data:font/woff2;base64,__GRENZE_B64__) format("woff2");}
+
+  :root{
+    --ink:#3a2a16; --red:#7a1410; --gold:#9c7416; --gold-bright:#c9a227; --parch:#efe2c0;
+    --script:"Blackletter","Old English Text MT",cursive;
+    --body:"Grenze","Grenze Gotisch",Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; min-height:100vh; padding:28px 16px 48px;
+    font-family:var(--body); font-size:21px; letter-spacing:.4px; line-height:1.5;
+    color:var(--ink); background:#231a10;
+    display:flex; justify-content:center; align-items:flex-start;}
+  button{font-family:var(--body); letter-spacing:.4px}
+  .hidden{display:none !important}
+
+  .page{position:relative; width:min(780px,100%); padding:44px 50px 38px;
+    background:radial-gradient(120% 90% at 30% 10%, #f7eccd 0%, #ecdcb4 55%, #dcc795 100%);
+    box-shadow:0 18px 50px rgba(0,0,0,.6), inset 0 0 90px rgba(120,80,30,.28); border-radius:3px;}
+  .page::before{content:""; position:absolute; inset:0; border-radius:3px; pointer-events:none;
+    opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  .frame{position:relative; border:2px solid var(--gold); padding:28px 30px 24px;
+    box-shadow:inset 0 0 0 4px var(--parch), inset 0 0 0 6px var(--gold);}
+  .corner{position:absolute; color:var(--gold); font-size:26px; line-height:1; font-family:var(--script)}
+  .corner.tl{top:-16px; left:-15px} .corner.tr{top:-16px; right:-15px; transform:scaleX(-1)}
+  .corner.bl{bottom:-18px; left:-15px; transform:scaleY(-1)} .corner.br{bottom:-18px; right:-15px; transform:scale(-1)}
+
+  h1.title{font-family:var(--script); font-size:46px; margin:.1em 0 0; color:var(--red);
+    font-weight:400; line-height:1.05; text-align:center}
+  .flourish{color:var(--gold); letter-spacing:6px; font-size:18px; text-align:center}
+  .subtitle{font-style:italic; color:#5a4326; margin:2px 0 16px; text-align:center; font-size:18px}
+
+  /* status block */
+  .rulerline{display:flex; align-items:center; gap:16px; margin:10px 0 14px}
+  .crest{width:78px; height:82px; flex:0 0 auto; filter:drop-shadow(1px 2px 2px rgba(0,0,0,.35))}
+  .rulername{line-height:1.45}
+  .rulername .nm{font-size:23px} .rulername b{color:#52351a}
+  .dropcap{font-family:var(--script); font-size:64px; color:var(--red); line-height:.8; float:left;
+    font-weight:400; text-shadow:1px 1px 0 var(--gold-bright); padding:4px 12px 0 0;}
+  .traits{font-style:italic; color:#6a4d28; font-size:18px}
+
+  .coins{font-size:18px; margin:2px 0 8px; color:#52351a}
+  .coins b{color:var(--red)}
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:7px 34px; margin:4px 0 8px; font-size:18px}
+  .stat .lab{display:flex; justify-content:space-between}
+  .bar{height:11px; margin-top:3px; background:rgba(90,60,20,.18);
+    border:1px solid var(--gold); border-radius:2px; overflow:hidden}
+  .bar > i{display:block; height:100%;
+    background:repeating-linear-gradient(45deg,var(--red),var(--red) 6px,#8d2018 6px,#8d2018 12px)}
+  .lineinfo{font-size:17px; color:#52351a; margin:4px 0}
+  .lineinfo .warn{color:var(--red)}
+  .neigh .war{color:var(--red); font-weight:bold}
+  .pos{color:#2f6f30} .neg{color:#9a2b22}
+
+  hr.rule{border:0; height:1px; margin:16px 0 14px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+  /* active decision */
+  .decision .kind{text-align:center; letter-spacing:3px; font-size:13px; text-transform:uppercase;
+    color:var(--gold); font-family:system-ui}
+  .decision .prompt{text-align:center; font-style:italic; font-size:20px; color:#43301a; margin:6px 0 14px; line-height:1.5}
+  .choices{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; align-items:center}
+  .choices li{width:min(440px,100%)}
+  .choices button{width:100%; cursor:pointer; font-size:18px;
+    background:linear-gradient(#f6ecce,#e7d4a6); color:#52351a;
+    border:1px solid var(--gold); border-radius:3px; padding:10px 16px; text-align:left;
+    transition:.15s; box-shadow:0 1px 0 #fff inset;}
+  .choices button::before{content:"\2766  "; color:var(--gold)}
+  .choices button:hover{background:linear-gradient(#fff7e2,#f0deb0);
+    box-shadow:0 0 12px rgba(201,162,39,.6); color:var(--red)}
+
+  /* chronicle log */
+  .chronicle{margin-top:18px}
+  .chronicle h2{font-family:var(--script); color:var(--red); font-size:24px; text-align:center; margin:0 0 6px; font-weight:400}
+  .clog{max-height:280px; overflow:auto; padding:6px 10px; font-size:17px;
+    border:1px solid rgba(156,116,22,.4); border-radius:3px; background:rgba(255,250,235,.35)}
+  .clog .yr{font-family:var(--script); color:var(--red); font-size:20px; margin:10px 0 2px}
+  .clog .yr:first-child{margin-top:0}
+  .clog .lab{color:#6a4d28}
+  .clog .res{margin-left:14px; font-style:italic; color:#43301a}
+  .clog .ent{color:#52351a}
+
+  /* small controls row */
+  .controls{display:flex; justify-content:space-between; align-items:center; margin-top:16px; font-size:14px; font-family:system-ui; color:#7a5d33}
+  .controls button{cursor:pointer; background:transparent; border:1px solid var(--gold); color:#6a4d28;
+    border-radius:3px; padding:5px 12px; font-size:13px}
+  .controls button:hover{background:rgba(156,116,22,.12); color:var(--red)}
+
+  /* title + end screens */
+  .center{text-align:center}
+  .bigbtn{cursor:pointer; font-size:20px; color:#52351a; background:linear-gradient(#f6ecce,#e7d4a6);
+    border:1px solid var(--gold); border-radius:4px; padding:12px 26px; margin-top:14px;
+    box-shadow:0 1px 0 #fff inset;}
+  .bigbtn:hover{background:linear-gradient(#fff7e2,#f0deb0); color:var(--red); box-shadow:0 0 14px rgba(201,162,39,.6)}
+  .seedrow{margin-top:16px; font-size:16px; color:#5a4326}
+  .seedrow input{font-family:var(--body); font-size:16px; width:140px; padding:5px 8px;
+    border:1px solid var(--gold); border-radius:3px; background:#fbf3da; color:#3a2a16; text-align:center}
+  .endmsg{font-size:22px; color:var(--red); font-style:italic; margin:14px 0}
+  .prestige{font-size:20px; color:#52351a}
+  .seedtag{font-size:13px; font-family:system-ui; color:#9a8456}
+  pre#selftest{white-space:pre-wrap; font-family:ui-monospace,monospace; font-size:14px; color:#2a2010}
+</style>
+</head>
+<body>
+<div class="page"><div class="frame">
+  <span class="corner tl">&#10070;</span><span class="corner tr">&#10070;</span>
+  <span class="corner bl">&#10070;</span><span class="corner br">&#10070;</span>
+
+  <!-- TITLE SCREEN -->
+  <div id="screen-title" class="center">
+    <div class="flourish">&#10086; &#10087; &#10086;</div>
+    <h1 class="title">Realm</h1>
+    <p class="subtitle">A chronicle of dynasty, war, and the keeping of a crown</p>
+    <p class="lineinfo">You are a new ruler. Set taxes, build your realm, marry, wage war,<br>
+       and keep your bloodline upon the throne for as long as fate allows.</p>
+    <button class="bigbtn" id="btn-begin">Begin a New Reign</button>
+    <div class="seedrow">
+      <label>Fate (optional seed): <input id="seed-input" placeholder="random" inputmode="numeric"></label>
+    </div>
+  </div>
+
+  <!-- PLAY SCREEN -->
+  <div id="screen-play" class="hidden">
+    <div class="flourish">&#10086; &#10087; &#10086;</div>
+    <h1 class="title" id="chron-title">The Chronicle</h1>
+    <p class="subtitle" id="chron-sub"></p>
+    <div id="status"></div>
+    <hr class="rule">
+    <div class="decision" id="decision"></div>
+    <div class="chronicle">
+      <h2>The Chronicle</h2>
+      <div class="clog" id="clog"></div>
+    </div>
+    <div class="controls">
+      <span class="seedtag" id="seedtag"></span>
+      <button id="btn-abdicate">Lay down the crown</button>
+    </div>
+  </div>
+
+  <!-- END SCREEN -->
+  <div id="screen-end" class="hidden center">
+    <div class="flourish">&#10086; &#10087; &#10086;</div>
+    <h1 class="title" id="end-title">An Ending</h1>
+    <p class="endmsg" id="end-msg"></p>
+    <p class="prestige" id="end-prestige"></p>
+    <div class="clog" id="clog-end" style="max-height:240px;text-align:left;margin:14px 0"></div>
+    <button class="bigbtn" id="btn-again">Begin a New Reign</button>
+  </div>
+
+  <!-- SELF-TEST OUTPUT (only when ?selftest) -->
+  <pre id="selftest" class="hidden"></pre>
+</div></div>
+
+<script>
+"use strict";
+// =========================================================================== //
+// ENGINE-START  — structure-preserving port of kingdom.py (no DOM in here)
+// =========================================================================== //
+
+// ---- seeded RNG (own PRNG; NOT byte-identical to CPython's, by design) ---- //
+function _hashSeed(n){ n=n>>>0; n=Math.imul(n^0x9e3779b9,0x85ebca6b); n^=n>>>13;
+  n=Math.imul(n,0xc2b2ae35); n^=n>>>16; return n>>>0; }
+class RNG{
+  constructor(seed){ this._s=_hashSeed(seed>>>0); }
+  random(){ let a=this._s; a=a+0x6D2B79F5|0; this._s=a>>>0;
+    let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t;
+    return ((t^t>>>14)>>>0)/4294967296; }
+  randint(a,b){ return a+Math.floor(this.random()*(b-a+1)); }   // inclusive of b
+  randrange(n){ return Math.floor(this.random()*n); }           // [0, n)
+  uniform(a,b){ return a+this.random()*(b-a); }
+  choice(arr){ return arr[this.randrange(arr.length)]; }
+  sample(arr,k){ const pool=arr.slice(), out=[];                // k DISTINCT items
+    for(let i=0;i<k;i++) out.push(pool.splice(this.randrange(pool.length),1)[0]);
+    return out; }
+}
+
+// ---- procedural names / content ---- //
+const _PRE=["Al","Ber","Cor","Dra","Ed","Gar","Hal","Ist","Jor","Kael","Lor","Mor",
+  "Nor","Os","Per","Rho","Ser","Tor","Ul","Vor","Wil","Yr","Aen","Bran","Cael","Dun"];
+const _MALE=["wen","dric","mund","gar","ric","bert","mir","lan","dor","win","fred",
+  "helm","stan","ulf","mar","var"];
+const _FEM=["wyn","ana","ella","ira","essa","lin","wen","ith","ara","isse","iel","yra","ona","elle"];
+const _PLACE=["mark","gard","helm","fell","wood","moor","vale","reach","hold","ford","crag","mere","wick","dale"];
+const _TRAITS=["Just","Cruel","Brave","Craven","Shrewd","Naive","Pious","Greedy",
+  "Generous","Wrathful","Patient","Ambitious"];
+
+function nameFor(rng,gender){ return rng.choice(_PRE)+rng.choice(gender==="m"?_MALE:_FEM); }
+function placeName(rng){ return rng.choice(_PRE)+rng.choice(_PLACE); }
+function clamp(v,lo=0,hi=100){ return Math.max(lo,Math.min(hi,v)); }
+
+// ---- data model ---- //
+function makePerson(rng,pid,rel,age,gender){
+  gender = gender || rng.choice(["m","f"]);
+  return { pid, name:nameFor(rng,gender), gender, age, rel,
+    martial:rng.randint(1,20), stewardship:rng.randint(1,20),
+    diplomacy:rng.randint(1,20), intrigue:rng.randint(1,20),
+    traits:rng.sample(_TRAITS,2), alive:true };
+}
+function newPerson(g,rel,age,gender){
+  const p=makePerson(g.rng,g.next_pid,rel,age,gender); g.next_pid+=1; return p;
+}
+const pTitle = p => `${p.name} (${p.age})`;
+
+function newGame(seed){
+  const rng=new RNG(seed);
+  const realm={ name:placeName(rng), treasury:200, population:5000,
+    prosperity:50, stability:60, legitimacy:60, army:300, tax_rate:25 };
+  const ruler=makePerson(rng,1,"ruler",rng.randint(22,30));
+  const g={ seed, rng, turn:0, year:1000+rng.randint(0,200), realm, ruler,
+    family:[], neighbors:[], next_pid:2, log:[], over:false, over_reason:"", last_event:"",
+    emit(msg){ this.log.push(msg); } };
+  const spouseGender = ruler.gender==="m" ? "f" : "m";
+  g.family.push(newPerson(g,"spouse",ruler.age-rng.randint(-3,4),spouseGender));
+  g.family.push(newPerson(g,"child",rng.randint(0,6)));
+  g.family.push(newPerson(g,"sibling",ruler.age+rng.randint(-6,6)));
+  for(let i=0;i<3;i++) g.neighbors.push({ name:placeName(rng),
+    relation:rng.randint(-30,40), strength:rng.randint(150,500), at_war:false, cooldown:0 });
+  return g;
+}
+
+const living = (g,rel) => g.family.filter(p=>p.alive && p.rel===rel);
+const spouseOf = g => { const s=living(g,"spouse"); return s.length?s[0]:null; };
+
+// ---- effects ---- //
+function apply(g,{treasury=0,prosperity=0,stability=0,legitimacy=0,army=0,population=0}={}){
+  const r=g.realm;
+  r.treasury+=treasury;
+  r.army=Math.max(0,r.army+army);
+  r.population=Math.max(0,r.population+population);
+  r.prosperity=clamp(r.prosperity+prosperity);
+  r.stability=clamp(r.stability+stability);
+  r.legitimacy=clamp(r.legitimacy+legitimacy);
+}
+
+// ---- events: each returns {name, prompt, options:[{label,effect}]} ---- //
+function eventPlague(g){ const region=placeName(g.rng);
+  return { name:"plague", prompt:`Plague spreads through ${region}. The dying cry for aid.`,
+    options:[
+      {label:"Fund physicians (-60g)", effect:()=>{ apply(g,{treasury:-60,stability:4,population:-200});
+        return "You fund physicians. Coffers lighter, the realm grateful."; }},
+      {label:"Let it run its course", effect:()=>{ apply(g,{population:-700,stability:-8,prosperity:-5});
+        return "You do nothing. The plague rages; villages empty."; }},
+    ]};
+}
+function eventPlot(g){ const pool=living(g,"sibling").concat(living(g,"child"));
+  const schemer = pool.length ? g.rng.choice(pool) : null;
+  const who = schemer ? schemer.name : nameFor(g.rng,"m");
+  return { name:"plot", prompt:`Whispers reach you: ${who} plots to seize your throne.`,
+    options:[
+      {label:"Execute the schemer", effect:()=>{
+        const win = g.rng.random() < (0.4 + g.ruler.intrigue/40);
+        if(win){ if(schemer) schemer.alive=false; apply(g,{stability:5,legitimacy:-4});
+          return `${who} is executed at dawn. A warning to all.`; }
+        apply(g,{stability:-10,legitimacy:-8});
+        return `The arrest fails. ${who} escapes and your weakness shows.`; }},
+      {label:"Pardon them", effect:()=>{ apply(g,{legitimacy:-6,stability:2});
+        return `You pardon ${who}. Mercy, or weakness — the court murmurs.`; }},
+      {label:"Buy their loyalty (-50g)", effect:()=>{ apply(g,{treasury:-50,stability:3});
+        return `Gold buys ${who}'s loyalty. For now.`; }},
+    ]};
+}
+function eventHarvest(g){
+  return { name:"harvest", prompt:"Stewards report an unusually fertile season.",
+    options:[
+      {label:"Tax the surplus (+50g)", effect:()=>{ apply(g,{treasury:50,prosperity:3});
+        return "You tax the surplus grain. The treasury swells."; }},
+      {label:"Let the people keep it", effect:()=>{ apply(g,{prosperity:8,stability:3});
+        return "You let folk keep the bounty. Prosperity grows."; }},
+    ]};
+}
+function eventKnight(g){ const knight=nameFor(g.rng,"m");
+  return { name:"knight", prompt:`A wandering sellsword, ${knight}, offers their blade.`,
+    options:[
+      {label:"Hire the company (-40g)", effect:()=>{ apply(g,{treasury:-40,army:80});
+        return `${knight} and their company join your host.`; }},
+      {label:"Decline", effect:()=>{ apply(g,{stability:-1});
+        return `You send ${knight} away. They mutter as they go.`; }},
+    ]};
+}
+function eventUnrest(g){ const region=placeName(g.rng);
+  return { name:"unrest", prompt:`Peasants in ${region} riot over their burdens.`,
+    options:[
+      {label:"Crush the revolt", effect:()=>{ apply(g,{army:-20,stability:6,population:-150,legitimacy:-3});
+        return "Soldiers crush the revolt. Order returns, at a cost."; }},
+      {label:"Make concessions (-30g)", effect:()=>{ apply(g,{treasury:-30,stability:4,prosperity:2});
+        return "You ease their burdens. The riots fade."; }},
+    ]};
+}
+function eventEnvoy(g){ const n=g.rng.choice(g.neighbors);
+  return { name:"envoy", prompt:`An envoy from ${n.name} proposes a trade pact.`,
+    options:[
+      {label:"Accept the pact", effect:()=>{ n.relation=clamp(n.relation+20,-100,100); apply(g,{treasury:30,prosperity:3});
+        return `Trade with ${n.name} flourishes.`; }},
+      {label:"Refuse", effect:()=>{ n.relation=clamp(n.relation-10,-100,100);
+        return `You spurn ${n.name}'s offer. They take it ill.`; }},
+    ]};
+}
+const EVENTS=[eventPlague,eventPlot,eventHarvest,eventKnight,eventUnrest,eventEnvoy];
+
+// ---- decrees: built from current state ---- //
+function decreeOptions(g){
+  const r=g.realm; const opts=[];
+  opts.push({label:"Raise taxes (+10%)", effect:()=>{ r.tax_rate=clamp(r.tax_rate+10); return `Taxes raised to ${r.tax_rate}%.`; }});
+  opts.push({label:"Lower taxes (-10%)", effect:()=>{ r.tax_rate=clamp(r.tax_rate-10); return `Taxes lowered to ${r.tax_rate}%.`; }});
+  opts.push({label:"Invest in the realm (-50g)", effect:()=>{ apply(g,{treasury:-50,prosperity:6}); return "You fund roads and markets. Prosperity rises."; }});
+  opts.push({label:"Recruit soldiers (-40g)", effect:()=>{ apply(g,{treasury:-40,army:100}); return "Fresh levies swell your army."; }});
+  opts.push({label:"Hold a feast (-30g)", effect:()=>{ apply(g,{treasury:-30,stability:5,legitimacy:3}); return "A grand feast lifts spirits across the realm."; }});
+
+  const worst = g.neighbors.reduce((a,b)=> b.relation<a.relation?b:a);
+  opts.push({label:`Send gifts to ${worst.name} (-30g)`, effect:()=>{ worst.relation=clamp(worst.relation+25,-100,100); apply(g,{treasury:-30});
+    return `Gifts and envoys warm relations with ${worst.name}.`; }});
+
+  if(g.ruler.age>=16 && spouseOf(g)===null){
+    opts.push({label:"Take a spouse (-40g)", effect:()=>{
+      const sg = g.ruler.gender==="m" ? "f" : "m";
+      const sp = newPerson(g,"spouse",Math.max(16,g.ruler.age-g.rng.randint(0,5)),sg);
+      g.family.push(sp); apply(g,{treasury:-40,legitimacy:3});
+      return `You wed ${sp.name}; the court celebrates a royal union.`; }});
+  }
+
+  const eligible = living(g,"child").filter(c=>c.age>=16);
+  const heirs = living(g,"child").concat(living(g,"sibling"));
+  if(eligible.length && heirs.length>=2){
+    const child=eligible[0];
+    const ally=g.neighbors.reduce((a,b)=> b.relation>a.relation?b:a);
+    opts.push({label:`Wed ${child.name} to ${ally.name}`, effect:()=>{
+      ally.relation=clamp(ally.relation+40,-100,100); apply(g,{legitimacy:4}); child.rel="married_out";
+      return `${child.name} weds into ${ally.name}. An alliance is sealed.`; }});
+  }
+
+  const hostile = g.neighbors.filter(n=>n.relation<0 && !n.at_war && n.cooldown===0);
+  if(hostile.length){
+    const target = hostile.reduce((a,b)=> b.relation<a.relation?b:a);
+    opts.push({label:`Declare war on ${target.name}`, effect:()=>{ target.at_war=true; apply(g,{stability:-4});
+      return `War! You march against ${target.name}.`; }});
+  }
+
+  opts.push({label:"Hold court (do nothing bold)", effect:()=>{ apply(g,{stability:1}); return "You hold court and tend to petitions."; }});
+  return opts;
+}
+
+// ---- turn phases ---- //
+function phaseEconomy(g){ const r=g.realm;
+  for(const n of g.neighbors){
+    if(n.cooldown>0) n.cooldown-=1;
+    if(g.rng.random()<0.15) n.strength+=g.rng.randint(10,40);
+  }
+  const steward=g.ruler.stewardship;
+  const income = Math.floor(r.population*r.tax_rate/1000) + Math.floor(r.prosperity/4) + steward;
+  const upkeep = Math.floor(r.army/4);
+  r.treasury += income-upkeep;
+  g.emit(`Treasury: +${income} income, -${upkeep} upkeep (now ${r.treasury}g).`);
+
+  if(r.tax_rate>40) r.stability=clamp(r.stability-Math.floor((r.tax_rate-40)/10));
+  if(r.treasury<0){
+    const penalty=Math.min(10, 3+Math.floor((-r.treasury)/1000));
+    r.stability=clamp(r.stability-penalty);
+    g.emit(`The crown owes ${-r.treasury}g; the court grows uneasy (-${penalty} stability).`);
+  }
+  if(r.stability>50) r.stability=clamp(r.stability-1);
+  const target=r.stability;
+  if(r.prosperity<target) r.prosperity=clamp(r.prosperity+2);
+  else if(r.prosperity>target) r.prosperity=clamp(r.prosperity-1);
+  const growth=Math.floor(r.population*(r.prosperity>=55?1:-1)/50);
+  r.population=Math.max(0,r.population+growth);
+}
+
+function phaseWar(g){ const r=g.realm;
+  for(const n of g.neighbors){
+    if(!n.at_war){
+      if(n.cooldown===0 && n.relation<-40 && n.strength>r.army*1.5 && g.rng.random()<0.3){
+        n.at_war=true; g.emit(`${n.name} senses weakness and invades!`);
+      }
+    }
+    if(!n.at_war) continue;
+    const ourPower = r.army*(1+g.ruler.martial/50)*(r.stability/50);
+    const theirPower = n.strength*g.rng.uniform(0.7,1.3);
+    if(ourPower>=theirPower){
+      const loot=g.rng.randint(40,120), losses=g.rng.randint(20,80);
+      apply(g,{treasury:loot,army:-losses,legitimacy:5,stability:2});
+      n.strength=Math.max(50,n.strength-g.rng.randint(40,100));
+      n.relation=clamp(n.relation-20,-100,100); n.at_war=false; n.cooldown=2;
+      g.emit(`Victory over ${n.name}! Plunder: +${loot}g, losses: ${losses} troops.`);
+    } else {
+      const losses=g.rng.randint(60,150), indemnity=g.rng.randint(30,90);
+      apply(g,{army:-losses,treasury:-indemnity,stability:-8,legitimacy:-6});
+      n.relation=clamp(n.relation-10,-100,100); n.at_war=false; n.cooldown=2;
+      g.emit(`Defeat by ${n.name}. Losses: ${losses} troops, indemnity: -${indemnity}g.`);
+      if(g.rng.random()<0.10){ g.emit(`${g.ruler.name} falls in battle!`); killRuler(g); }
+    }
+  }
+}
+
+function phaseAging(g){
+  g.ruler.age+=1;
+  for(const p of g.family) if(p.alive) p.age+=1;
+  const spouse=spouseOf(g);
+  if(spouse && g.ruler.age<48 && spouse.age<45 && g.rng.random()<0.30){
+    const child=newPerson(g,"child",0); g.family.push(child);
+    g.emit(`A child is born to the royal house: ${child.name}.`);
+  }
+  for(const p of [g.ruler].concat(g.family.slice())){
+    if(!p.alive) continue;
+    let chance=0.01+Math.max(0,p.age-50)*0.015;
+    if(p.age>70) chance+=0.05;
+    if(g.rng.random()<chance){
+      if(p===g.ruler){ g.emit(`${g.ruler.name} dies, aged ${g.ruler.age}.`); killRuler(g); }
+      else p.alive=false;
+    }
+  }
+}
+
+function chooseHeir(g){
+  const children=living(g,"child").slice().sort((a,b)=>b.age-a.age);
+  if(children.length) return children[0];
+  const siblings=living(g,"sibling").slice().sort((a,b)=>b.age-a.age);
+  if(siblings.length) return siblings[0];
+  return null;
+}
+
+function killRuler(g){
+  if(g.over) return;
+  g.ruler.alive=false;
+  const heir=chooseHeir(g);
+  if(heir===null){ g.over=true; g.over_reason="The dynasty is extinguished — no heir remains.";
+    g.emit(g.over_reason); return; }
+  const old=g.ruler;
+  g.family=g.family.filter(p=>p!==heir && p.alive);
+  heir.rel="ruler"; g.ruler=heir;
+  g.realm.stability=clamp(g.realm.stability-10);
+  g.realm.legitimacy=clamp(g.realm.legitimacy-5);
+  g.emit(`${heir.name} ascends the throne (succeeding ${old.name}). The transition shakes the realm.`);
+  if(heir.age>=16 && !spouseOf(g) && g.rng.random()<0.7){
+    const sg = heir.gender==="m" ? "f" : "m";
+    g.family.push(newPerson(g,"spouse",Math.max(18,heir.age-4),sg));
+  }
+}
+
+function prestigeScore(g){ const r=g.realm;
+  return Math.max(0, g.turn*10 + r.legitimacy + r.stability + r.prosperity
+    + Math.floor(Math.max(0,r.treasury)/10) + Math.floor(r.population/200));
+}
+
+// ---- turn orchestration. `choose(prompt, labels)` -> index (may be a Promise). ---- //
+async function processTurn(g, choose){
+  g.turn+=1; g.year+=1; g.log=[];
+  g.emit(`=== Year ${g.year} (turn ${g.turn}) — ${g.ruler.name} of ${g.realm.name} ===`);
+
+  phaseEconomy(g); if(g.over) return;
+
+  let pool=EVENTS.filter(e=>e.name!==g.last_event); if(!pool.length) pool=EVENTS;
+  const factory=g.rng.choice(pool); g.last_event=factory.name;
+  const ev=factory(g);
+  let idx=await choose("EVENT: "+ev.prompt, ev.options.map(o=>o.label));
+  g.emit("EVENT: "+ev.prompt);
+  g.emit("  > "+ev.options[idx].effect());
+  if(g.over) return;
+
+  const dopts=decreeOptions(g);
+  idx=await choose("DECREE: choose your action", dopts.map(o=>o.label));
+  g.emit("DECREE: "+dopts[idx].label);
+  g.emit("  > "+dopts[idx].effect());
+
+  phaseWar(g); if(g.over) return;
+  phaseAging(g);
+}
+
+// ---- invariants: the contract the simulation must never violate ---- //
+function checkInvariants(g){
+  const r=g.realm;
+  if(!Number.isInteger(r.treasury)) throw new Error("treasury must be integer: "+r.treasury);
+  if(r.army<0) throw new Error("army negative: "+r.army);
+  if(r.population<0) throw new Error("population negative: "+r.population);
+  for(const f of ["prosperity","stability","legitimacy"]){
+    const v=r[f]; if(!(v>=0 && v<=100)) throw new Error(`${f} out of bounds: ${v}`);
+  }
+  if(!(r.tax_rate>=0 && r.tax_rate<=100)) throw new Error("tax_rate out of bounds: "+r.tax_rate);
+  if(g.ruler.age<0) throw new Error("ruler age negative");
+  if(g.over){
+    if(!g.over_reason) throw new Error("game over must carry a reason");
+    if(g.ruler.alive) throw new Error("game over implies the ruler has died");
+    if(chooseHeir(g)!==null) throw new Error("game over only when no heir remains");
+  } else {
+    if(!g.ruler.alive) throw new Error("ruling monarch must be alive");
+    if(g.ruler.rel!=="ruler") throw new Error("ruler.rel must be 'ruler'");
+  }
+  for(const n of g.neighbors){
+    if(!(n.relation>=-100 && n.relation<=100)) throw new Error("relation out of bounds: "+n.relation);
+    if(n.strength<0) throw new Error("neighbor strength negative");
+  }
+}
+
+// ---- self-play harness (mirrors python kingdom.py --selfplay) ---- //
+async function selfPlay(seed, turns=30){
+  const g=newGame(seed); checkInvariants(g);
+  for(let i=0;i<turns;i++){
+    if(g.over) break;
+    await processTurn(g, (_p,labels)=>g.rng.randrange(labels.length));
+    checkInvariants(g);
+  }
+  return g;
+}
+async function runHarness(seeds=10, turns=30){
+  let ok=true, over=0, reign=0; const fails=[];
+  for(let seed=0; seed<seeds; seed++){
+    try{ const g=await selfPlay(seed,turns); if(g.over) over++; else reign++; }
+    catch(e){ ok=false; fails.push(`seed ${seed}: ${e.message}`); }
+  }
+  const summary=`${ok?"PASS":"FAIL"} — ${seeds} seeds x ${turns} turns | reigning:${reign} game-over:${over}`
+    + (fails.length? "\n"+fails.join("\n") : "");
+  return { ok, summary };
+}
+
+if(typeof module!=="undefined" && module.exports){
+  module.exports={ RNG, newGame, processTurn, checkInvariants, selfPlay, runHarness,
+    prestigeScore, decreeOptions, living, EVENTS };
+}
+// =========================================================================== //
+// ENGINE-END
+// =========================================================================== //
+
+// =========================================================================== //
+// UI  (browser only)
+// =========================================================================== //
+if(typeof document!=="undefined"){
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+  let g=null, pendingReject=null;
+
+  function show(which){
+    for(const s of ["title","play","end"]) $("screen-"+s).classList.toggle("hidden", s!==which);
+  }
+
+  // ---- procedural coat of arms from the realm name ---- //
+  function strHash(s){ let h=2166136261>>>0;
+    for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+  function buildCrest(name){
+    const h=strHash(name);
+    const colors=["#7a1410","#1c3a5e","#2f5e3a","#5a2f7a","#155e63","#3a3a3a","#7a4a12"];
+    const metals=["#d8b54a","#e6e0cf"];
+    const c1=colors[h%colors.length];
+    const c2=colors[(h>>3)%colors.length];
+    const met=metals[(h>>6)%metals.length];
+    const division=(h>>9)%3;        // 0 per pale, 1 per fess, 2 solid
+    const charge=(h>>12)%4;         // 0 tower, 1 cross, 2 lozenge, 3 star
+    let field;
+    if(division===0) field=`<rect x="0" y="0" width="50" height="105" fill="${c1}"/><rect x="50" y="0" width="50" height="105" fill="${c2}"/>`;
+    else if(division===1) field=`<rect x="0" y="0" width="100" height="52" fill="${c1}"/><rect x="0" y="52" width="100" height="53" fill="${c2}"/>`;
+    else field=`<rect x="0" y="0" width="100" height="105" fill="${c1}"/>`;
+    let ch;
+    if(charge===0) ch=`<rect x="38" y="42" width="24" height="34"/><rect x="36" y="36" width="6" height="8"/><rect x="47" y="36" width="6" height="8"/><rect x="58" y="36" width="6" height="8"/>`;
+    else if(charge===1) ch=`<rect x="45" y="36" width="10" height="40"/><rect x="34" y="50" width="32" height="10"/>`;
+    else if(charge===2) ch=`<polygon points="50,34 66,57 50,80 34,57"/>`;
+    else ch=`<polygon points="50,34 55,50 72,50 58,60 63,77 50,67 37,77 42,60 28,50 45,50"/>`;
+    return `<svg class="crest" viewBox="0 0 100 105" aria-hidden="true">
+      <defs><clipPath id="crestclip"><path d="M6 6 H94 V46 Q94 88 50 100 Q6 88 6 46 Z"/></clipPath></defs>
+      <g clip-path="url(#crestclip)">${field}<g fill="${met}">${ch}</g></g>
+      <path d="M6 6 H94 V46 Q94 88 50 100 Q6 88 6 46 Z" fill="none" stroke="#9c7416" stroke-width="4"/>
+    </svg>`;
+  }
+
+  const relClass = v => v>=0 ? "pos" : "neg";
+
+  function renderStatus(){
+    const r=g.realm, ru=g.ruler;
+    $("chron-title").textContent = "The Chronicle of "+r.name;
+    $("chron-sub").textContent = `In the year ${g.year} — the reign of ${ru.name}`;
+    const heirs=living(g,"child").concat(living(g,"sibling"));
+    const heirStr = heirs.length ? heirs.map(pTitle).join(", ")
+      : '<span class="warn">no heir remains!</span>';
+    const neighStr = g.neighbors.map(n=>
+      `${esc(n.name)}(<span class="${relClass(n.relation)}">${n.relation>=0?"+":""}${n.relation}</span>${n.at_war?'<span class="war">,WAR</span>':""})`
+    ).join(", ");
+    const initial = ru.name.charAt(0), rest = ru.name.slice(1);
+    $("status").innerHTML = `
+      <div class="rulerline">
+        ${buildCrest(r.name)}
+        <div class="rulername">
+          <span class="dropcap">${esc(initial)}</span>
+          <span class="nm"><b>${esc(rest)}</b>, aged ${ru.age}, rules <b>${esc(r.name)}</b>.</span><br>
+          <span class="traits">— ${ru.traits.map(esc).join(", ")} of temper.</span>
+        </div>
+      </div>
+      <p class="coins">Treasury <b>${r.treasury}g</b> &nbsp;·&nbsp; Tax ${r.tax_rate}% &nbsp;·&nbsp; Army <b>${r.army}</b> &nbsp;·&nbsp; Souls <b>${r.population.toLocaleString()}</b></p>
+      <div class="stats">
+        <div class="stat"><div class="lab"><span>Prosperity</span><span>${r.prosperity}</span></div><div class="bar"><i style="width:${r.prosperity}%"></i></div></div>
+        <div class="stat"><div class="lab"><span>Stability</span><span>${r.stability}</span></div><div class="bar"><i style="width:${r.stability}%"></i></div></div>
+        <div class="stat"><div class="lab"><span>Legitimacy</span><span>${r.legitimacy}</span></div><div class="bar"><i style="width:${r.legitimacy}%"></i></div></div>
+        <div class="stat"><div class="lab"><span>Heirs</span></div><div>${heirStr}</div></div>
+      </div>
+      <div class="lineinfo neigh">Neighbours: ${neighStr}</div>`;
+  }
+
+  function renderDecision(prompt, labels, onPick){
+    const isEvent = prompt.startsWith("EVENT: ");
+    const kind = isEvent ? "A matter at court" : "Issue a decree";
+    const text = prompt.replace(/^EVENT: /,"").replace(/^DECREE: choose your action/,"What is your will this year?");
+    let html = `<div class="kind">${kind}</div><div class="prompt">${esc(text)}</div><ul class="choices">`;
+    labels.forEach((lab,i)=> html += `<li><button data-i="${i}">${esc(lab)}</button></li>`);
+    html += `</ul>`;
+    const box=$("decision"); box.innerHTML=html;
+    box.querySelectorAll("button").forEach(b=> b.onclick=()=>{ onPick(parseInt(b.dataset.i,10)); });
+  }
+
+  function logLineHTML(line){
+    if(line.startsWith("===")){ const t=line.replace(/=/g,"").replace(/\(turn \d+\)/,"").trim();
+      return `<div class="yr">${esc(t)}</div>`; }
+    if(line.startsWith("  > ")) return `<div class="res">${esc(line.slice(4))}</div>`;
+    if(line.startsWith("EVENT: ")) return `<div class="lab">⚜ ${esc(line.slice(7))}</div>`;
+    if(line.startsWith("DECREE: ")) return `<div class="lab">❦ ${esc(line.slice(8))}</div>`;
+    return `<div class="ent">${esc(line)}</div>`;
+  }
+  function appendChronicle(lines){
+    const box=$("clog");
+    box.insertAdjacentHTML("beforeend", lines.map(logLineHTML).join(""));
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function uiChoose(prompt, labels){
+    renderStatus();
+    return new Promise((resolve,reject)=>{
+      pendingReject=reject;
+      renderDecision(prompt, labels, idx=>{ pendingReject=null; resolve(idx); });
+    });
+  }
+
+  function showEnd(abdicated){
+    show("end");
+    const prestige=prestigeScore(g);
+    $("end-title").textContent = abdicated ? "The Crown Laid Down" : "An Ending";
+    $("end-msg").textContent = abdicated
+      ? `Content, you abdicate after ${g.turn} years upon the throne of ${g.realm.name}.`
+      : `${g.over_reason}  Your dynasty ruled ${g.realm.name} for ${g.turn} years.`;
+    $("end-prestige").textContent = `Final prestige: ${prestige}   ·   (fate seed ${g.seed})`;
+    $("clog-end").innerHTML = $("clog").innerHTML;
+    $("clog-end").scrollTop = $("clog-end").scrollHeight;
+  }
+
+  async function runGame(seed){
+    g=newGame(seed);
+    $("clog").innerHTML="";
+    $("seedtag").textContent="fate seed "+seed;
+    show("play");
+    try{
+      while(!g.over){
+        renderStatus();
+        await processTurn(g, uiChoose);
+        appendChronicle(g.log);
+        renderStatus();
+      }
+      showEnd(false);
+    }catch(e){
+      if(e && e.abdicate) showEnd(true);
+      else throw e;
+    }
+  }
+
+  function startNew(){
+    const raw=($("seed-input").value||"").trim();
+    let seed = raw!=="" && /^\d+$/.test(raw) ? (parseInt(raw,10)>>>0) : Math.floor(Math.random()*1e9);
+    runGame(seed);
+  }
+
+  // wire up
+  window.addEventListener("DOMContentLoaded", ()=>{
+    // self-test mode: ?selftest  (optional ?seeds= &turns=)
+    const qs=new URLSearchParams(location.search);
+    if(qs.has("selftest")){
+      $("screen-title").classList.add("hidden");
+      const out=$("selftest"); out.classList.remove("hidden");
+      out.textContent="Running self-play harness…";
+      const seeds=parseInt(qs.get("seeds")||"200",10), turns=parseInt(qs.get("turns")||"40",10);
+      runHarness(seeds,turns).then(r=> out.textContent=r.summary);
+      return;
+    }
+    $("btn-begin").onclick=startNew;
+    $("btn-again").onclick=()=>show("title");
+    $("seed-input").addEventListener("keydown",e=>{ if(e.key==="Enter") startNew(); });
+    $("btn-abdicate").onclick=()=>{ if(pendingReject){ const rj=pendingReject; pendingReject=null; rj({abdicate:true}); } };
+  });
+
+  window.Realm={ RNG, newGame, processTurn, checkInvariants, selfPlay, runHarness, prestigeScore };
+}
+</script>
+</body>
+</html>
